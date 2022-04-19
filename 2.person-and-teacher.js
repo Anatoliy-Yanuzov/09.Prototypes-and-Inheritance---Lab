@@ -1,22 +1,42 @@
 function personAndTeacher() {
-    class Person {
-        constructor(name, email) {
-            this.name = name;
-            this.email = email;
-        }
+
+    // Solved by class-inheritance
+
+    // class Person {
+    //     constructor(name, email) {
+    //         this.name = name;
+    //         this.email = email;
+    //     }
+    // }
+
+    // class Teacher extends Person {
+    //     constructor(name, email, subject) {
+    //         super(name, email)
+    //         this.subject = subject;
+    //     }
+    // }
+
+    // return {
+    //     Person,
+    //     Teacher,
+    // }
+
+    // Solved by prototype-inheritance
+    function Person(name, email) {
+        this.name = name;
+        this.email = email;
     }
-    
-    class Teacher extends Person {
-        constructor(name, email, subject) {
-            super(name, email)
-            this.subject = subject;
-        }
+
+    function Teacher(name, email, subject) {
+        Person.call(this, name, email);
+        this.subject = subject;
     }
-    // let person = new Person('Ivan', 'ivan@abv.bg');
-    // let teacher = new Teacher('Ivan', 'ivan@abv.bg', 'IT')
-    return {
+
+    Teacher.prototype = Object.create(Person.prototype);
+
+    return{
         Person,
-        Teacher
+        Teacher,
     }
 }
 console.log(personAndTeacher())
